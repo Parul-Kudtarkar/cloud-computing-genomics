@@ -1,5 +1,7 @@
 cloud-computing-genomics
 
+Software stack can be downloaded at www.biomedcentral.com/content/supplementary/1471-2105-11-259-S1.ZIP
+
 manuscript->Dennis P. Wall, Parul Kudtarkar, Vincent Fusaro, Rimma Pivovarov, Prasad Patil, and Peter Tonellato. Cloud computing for comparative genomics. BMC Bioinformatics, Vol. 11, No. 1. (2010), 259.
 
 Parul Kudtarkar, Todd F. DeLuca, Vincent A. Fusaro, Peter J. Tonellato and Dennis P. Wall, Cost‐effective cloud computing: a case study using the comparative genomics tool Roundup. Evolutionary Bioinformatics , (2010) 6: 197–203
