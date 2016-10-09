@@ -81,3 +81,4 @@ Termiate cluster
 
 Transfer result to local cluster using s3cmd
 s3cmd get s3://<s3bucketname>/ortholog_result <destination directory in home folder>
+
