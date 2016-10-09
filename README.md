@@ -1,9 +1,9 @@
-# cloud-computing-genomics
-#manuscript->Dennis P. Wall, Parul Kudtarkar, Vincent Fusaro, Rimma Pivovarov, Prasad Patil, and Peter Tonellato. Cloud computing for comparative genomics. BMC Bioinformatics, Vol. 11, No. 1. (2010), 259.
-#Parul Kudtarkar, Todd F. DeLuca, Vincent A. Fusaro, Peter J. Tonellato and Dennis P. Wall, Cost‐effective cloud computing: a case study using the comparative genomics tool Roundup. Evolutionary Bioinformatics , (2010) 6: 197–203
-#manuscript link:https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-259
-#http://www.la-press.com/cost-effective-cloud-computing-a-case-study-using-the-comparative-geno-article-a2422
-#This file explains ortholog computation using Amazon's Elastic MapReduce cloud
+cloud-computing-genomics
+manuscript->Dennis P. Wall, Parul Kudtarkar, Vincent Fusaro, Rimma Pivovarov, Prasad Patil, and Peter Tonellato. Cloud computing for comparative genomics. BMC Bioinformatics, Vol. 11, No. 1. (2010), 259.
+Parul Kudtarkar, Todd F. DeLuca, Vincent A. Fusaro, Peter J. Tonellato and Dennis P. Wall, Cost‐effective cloud computing: a case study using the comparative genomics tool Roundup. Evolutionary Bioinformatics , (2010) 6: 197–203
+manuscript link:https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-259
+http://www.la-press.com/cost-effective-cloud-computing-a-case-study-using-the-comparative-geno-article-a2422
+This file explains ortholog computation using Amazon's Elastic MapReduce cloud
 ---------------------------------------------
 The Cloud_RSD package contains the following:
 ---------------------------------------------
