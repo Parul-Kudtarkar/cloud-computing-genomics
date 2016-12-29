@@ -2,9 +2,6 @@ cloud-computing-genomics
 
 #This file explains ortholog computation using Amazon's Elastic MapReduce
 
-Download
-Software stack can be downloaded at www.biomedcentral.com/content/supplementary/1471-2105-11-259-S1.ZIP
-
 manuscript
 Dennis P. Wall, Parul Kudtarkar, Vincent Fusaro, Rimma Pivovarov, Prasad Patil, and Peter Tonellato. Cloud computing for comparative genomics. BMC Bioinformatics, Vol. 11, No. 1. (2010), 259.
 
