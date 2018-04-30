@@ -44,7 +44,7 @@ example -> contains example of genome and runner files
 
 **Step2: executables**
 
-The Washington University BLAST 2.0 executables require that a license agreement be established at the following website http://blast.wustl.edu/licensing before downloading.The programs blastp (the protein based blast tool), xdget, matrix folder within the wublast package and xdformat are required to run RSD. Also ensure that the blastp (the protein based blast tool), xdget and xdformat binary files have execute, write and read permission(chmod 777 blastp). We have already made the codeml and clustalw binaries available in the executable folder. Insert blastp,xdget,xdformat binaries and matrix folder within the executables folder and create a gzipped tar ball i.e.
+The Washington University BLAST 2.0 executables require that a license agreement be established at the following website http://blast.wustl.edu/licensing before downloading.The programs blastp (the protein based blast tool), xdget, matrix folder within the wublast package and xdformat are required to run RSD. Also ensure that the blastp (the protein based blast tool), xdget and xdformat binary files have execute, write and read permission(chmod 777 blastp). We have already made the codeml and clustalw binaries available in the executable folder. Insert blastp, xdget, xdformat binaries and matrix folder within the executables folder and create a gzipped tar ball i.e.
 
 ```
 tar cvf executables.tar executables/
@@ -58,8 +58,7 @@ create a flat file genomeslist within the Cloud_RSD folder which contains genome
 Run generate_blastrunner.py
 
 ```
-python generate_blastrunner.py --source <Path to the genomeslist file> --destination <Path to store the blastrunner file>) to generate blastrunner file
-Run generate_rsdrunner.py(python generate_rsdrunner.py --source<Path to the genomeslist file> --destination <Path to store rsdrunner file>) to generate rsdrunner file
+python generate_blastrunner.py --source <Path to the genomeslist file> --destination <Path to store the blastrunner file>) 
 ```
 
 **Step4: within RSD_standalone package**
@@ -79,7 +78,7 @@ pk76@orchestra:~/dev/trunk/Cloud_RSD$ gzip genomes.tar
 
 **Step6: Transfer contents of Cloud_RSD folder** 
 
-blastmapper.py,rsdmapper.py,executables.tar.gz,RSD_standalone.tar.gz,genomes.tar.gz,blastout.sh,blastinput.tar.gz,result.tar.gz,blast_result,ortholog_result,log,blastrunner,rsdrunner to your s3 bucket using s3cmd tool(http://s3tools.org/s3cmd)
+blastmapper.py, rsdmapper.py, executables.tar.gz, RSD_standalone.tar.gz, genomes.tar.gz, blastout.sh, blastinput.tar.gz, result.tar.gz, blast_result, ortholog_result, log, blastrunner, rsdrunner to your s3 bucket using s3cmd tool(http://s3tools.org/s3cmd)
 
 ```
 s3cmd put ~/dev/trunk/Cloud_RSD/RSD_standalone.tar.gz s3://<s3bucketname>/
