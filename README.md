@@ -4,9 +4,9 @@
 
 ## Manuscript
 
-Dennis P. Wall, Parul Kudtarkar, Vincent Fusaro, Rimma Pivovarov, Prasad Patil, and Peter Tonellato. [Cloud computing for comparative genomics.] (https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-259) BMC Bioinformatics, Vol. 11, No. 1. (2010), 259.
+Dennis P. Wall, Parul Kudtarkar, Vincent Fusaro, Rimma Pivovarov, Prasad Patil, and Peter Tonellato. [Cloud computing for comparative genomics.](https://bmcbioinformatics.biomedcentral.com/articles/10.1186/1471-2105-11-259) BMC Bioinformatics, Vol. 11, No. 1. (2010), 259.
 
-Parul Kudtarkar, Todd F. DeLuca, Vincent A. Fusaro, Peter J. Tonellato and Dennis P. Wall, [Cost‐effective cloud computing: a case study using the comparative genomics tool Roundup.] (http://www.la-press.com/cost-effective-cloud-computing-a-case-study-using-the-comparative-geno-article-a2422
+Parul Kudtarkar, Todd F. DeLuca, Vincent A. Fusaro, Peter J. Tonellato and Dennis P. Wall, [Cost‐effective cloud computing: a case study using the comparative genomics tool Roundup.](http://www.la-press.com/cost-effective-cloud-computing-a-case-study-using-the-comparative-geno-article-a2422
 ) Evolutionary Bioinformatics , (2010) 6: 197–203
 
 
@@ -40,9 +40,10 @@ example -> contains example of genome and runner files
 
 ### Steps to run RSD algorithm on Amazon's Elastic MapReduce cloud(Refer to the manuscript Cloud Computing for Comparative Genomics by Wall et al.)
 
-### Step1: get your FASTA formatted Genomes that you care to analyze and ensure that each fasta entry of the query has a unique prefix identifier,pre-formatted using a program designed to strip out offending characters from the name field and formatted for blastp using xdformat(refer the genomes folder within the example folder)
+**Step1: get your FASTA formatted Genomes that you care to analyze and ensure that each fasta entry of the query has a unique prefix identifier,pre-formatted using a program designed to strip out offending characters from the name field and formatted for blastp using xdformat(refer the genomes folder within the example folder)**
 
-### Step2: executables
+**Step2: executables**
+
 The Washington University BLAST 2.0 executables require that a license agreement be established at the following website http://blast.wustl.edu/licensing before downloading.The programs blastp (the protein based blast tool), xdget, matrix folder within the wublast package and xdformat are required to run RSD. Also ensure that the blastp (the protein based blast tool), xdget and xdformat binary files have execute, write and read permission(chmod 777 blastp). We have already made the codeml and clustalw binaries available in the executable folder. Insert blastp,xdget,xdformat binaries and matrix folder within the executables folder and create a gzipped tar ball i.e.
 
 ```
@@ -50,37 +51,42 @@ tar cvf executables.tar executables/
          gzip executables.tar
 ```
 
-### Step3: Generate blast and rsd runner file
+**Step3: Generate blast and rsd runner file**
+
 create a flat file genomeslist within the Cloud_RSD folder which contains genome names for which we desire to compute orthologs(refer the flat file genomeslist in the examples folder)
 
 Run generate_blastrunner.py
+
 ```
 python generate_blastrunner.py --source <Path to the genomeslist file> --destination <Path to store the blastrunner file>) to generate blastrunner file
 Run generate_rsdrunner.py(python generate_rsdrunner.py --source<Path to the genomeslist file> --destination <Path to store rsdrunner file>) to generate rsdrunner file
 ```
 
-### Step4: within RSD_standalone package in, 
+**Step4: within RSD_standalone package**
+
 ```
 Blast_compute.py(line 101) replace os.system("/home/hadoop/bin/hadoop fs -copyFromLocal %s s3n://<s3bucketname>/blastresult/"%outputDbName) "<s3bucketname>" with the actual name of your s3 bucket
 
 RSD.py(line 845) replace os.system("/home/hadoop/bin/hadoop fs -copyFromLocal %s s3n://<s3bucketname>/out/"%outfile)  "<s3bucketname>" with the actual name of your s3 bucket
 ```
 
-### Step5:Create gzipped tar ball of genomes and RSD_standalone
+**Step5:Create gzipped tar ball of genomes and RSD_standalone**
+
 ```
 pk76@orchestra:~/dev/trunk/Cloud_RSD$ tar cvf genomes.tar  genomes/
 pk76@orchestra:~/dev/trunk/Cloud_RSD$ gzip genomes.tar
 ```
 
-### Step6: Transfer contents of Cloud_RSD folder 
+**Step6: Transfer contents of Cloud_RSD folder** 
 
 blastmapper.py,rsdmapper.py,executables.tar.gz,RSD_standalone.tar.gz,genomes.tar.gz,blastout.sh,blastinput.tar.gz,result.tar.gz,blast_result,ortholog_result,log,blastrunner,rsdrunner to your s3 bucket using s3cmd tool(http://s3tools.org/s3cmd)
+
 ```
 s3cmd put ~/dev/trunk/Cloud_RSD/RSD_standalone.tar.gz s3://<s3bucketname>/
 ```
 Where <s3bucketname> is the actual name of your s3 bucket
 
-### Step7:Run RSD on cloud(using elastic mapreduce ruby command line interface:http://developer.amazonwebservices.com/connect/entry.jspa?externalID=2264)
+**Step7:Run RSD on cloud(using elastic mapreduce ruby command line interface:http://developer.amazonwebservices.com/connect/entry.jspa?externalID=2264)**
 
 Example of a test rsd run on emr
 
@@ -127,12 +133,12 @@ Run Roundup mapper script:
 ~/Desktop/elastic-mapreduce-ruby CBI$ ./elastic-mapreduce -j j-2I5DFUCGWDEYS --stream --input hdfs:///home/hadoop/rsdrunner --mapper s3n://testingrsd/rsdmapper.py --reducer NONE --cache-archive s3n://testingrsd/executables.tar.gz#executables --cache-archive s3n://testingrsd/genomes.tar.gz#genomes --cache-archive s3n://testingrsd/result.tar.gz#result --cache-archive s3n://testingrsd/RSD_standalone.tar.gz#RSD_standalone --cache-archive s3n://testingrsd/blastinput.tar.gz#blastinput --output hdfs:///home/hadoop/--jobconf mapred.tasktracker.map.tasks.maximum=8 --jobconf mapred.task.timeout=604800000 --jobconf mapred.tasktracker.expiry.interval=3600000 --jobconf mapred.map.tasks.speculative.execution=false
 ```
 
-### Step8: Monitor the job flow 
+**Step8: Monitor the job flow**
 
 With the web address of the master node, monitor the status of the cluster through a user interface called FoxyProxy.To access this UI, it is necessary to establish SOCKS server on the local machine and an SSH tunnel between local machine and master node,  This UI shows general health of the cluster, including how many jobs were launched, how many are currently running, the number in queue, etc
 
 
-### Step9:Termiate the cluster upon completion of rsd computation and transfer the results to local system!!!
+**Step9:Termiate the cluster upon completion of rsd computation and transfer the results to local system!!!**
 
 Termiate cluster 
 
